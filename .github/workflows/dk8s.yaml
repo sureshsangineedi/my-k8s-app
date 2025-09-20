@@ -16,7 +16,7 @@ jobs:
 
       - name: Apply Kubernetes manifests
         run: |
-          kubectl apply -f k8s-manifests/pvc.yaml
+          kubectl apply -f k8s-manifests/configmap.yaml
           kubectl apply -f k8s-manifests/deployment.yaml
           kubectl apply -f k8s-manifests/service.yaml
         shell: powershell
