@@ -14,12 +14,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Configure kubeconfig
-        run: |
-          New-Item -ItemType Directory -Force -Path $env:USERPROFILE\.kube
-          $env:KUBECONFIG_CONTENT | Out-File -FilePath $env:USERPROFILE\.kube\config -Encoding utf8
-        shell: powershell
-
       - name: Apply Kubernetes manifests
         run: |
           kubectl apply -f k8s-manifests/pvc.yaml
