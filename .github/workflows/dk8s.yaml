@@ -10,6 +10,9 @@ jobs:
   deploy:
     runs-on: self-hosted  # your Windows runner label
 
+      - name: Checkout code
+        uses: actions/checkout@v3
+
     steps:
       - name: Apply Kubernetes manifests
         run: kubectl apply -f k8s-manifests/
