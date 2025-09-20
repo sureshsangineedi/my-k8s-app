@@ -12,8 +12,6 @@ jobs:
 
     steps:
       - name: Apply Kubernetes manifests
-        run: |
-          kubectl apply -f k8s-manifests/configmap.yaml
-          kubectl apply -f k8s-manifests/deployment.yaml
-          kubectl apply -f k8s-manifests/service.yaml
-        shell: powershell
+        run: kubectl apply -f k8s-manifests/
+
+       # shell: powershell
