@@ -1,0 +1,28 @@
+name: Deploy to Kubernetes
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: self-hosted  # your Windows runner label
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Configure kubeconfig
+        run: |
+          New-Item -ItemType Directory -Force -Path $env:USERPROFILE\.kube
+          $env:KUBECONFIG_CONTENT | Out-File -FilePath $env:USERPROFILE\.kube\config -Encoding utf8
+        shell: powershell
+
+      - name: Apply Kubernetes manifests
+        run: |
+          kubectl apply -f k8s-manifests/pvc.yaml
+          kubectl apply -f k8s-manifests/deployment.yaml
+          kubectl apply -f k8s-manifests/service.yaml
+        shell: powershell
